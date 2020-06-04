@@ -491,9 +491,7 @@ class Engine():
                 )
 
                 if response.status_code == 404:
-                    print("Error 404: The data source or server not found")
-                    os.remove(path)
-                    return None
+                    print("The data source or server may be redirected or not found")
 
             except InvalidSchema:
                 try:
@@ -862,10 +860,7 @@ class Engine():
 
     def set_table_delimiter(self, file_path):
         """Get the delimiter from the data file and set it."""
-        if os.name == "nt":
-            dataset_file = open_fr(file_path)
-        else:
-            dataset_file = open_fr(file_path, encoding=self.encoding)
+        dataset_file = open_fr(file_path, encoding=self.encoding)
         self.auto_get_delimiter(dataset_file.readline())
         dataset_file.close()
 
